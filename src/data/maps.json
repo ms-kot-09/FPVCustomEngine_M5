@@ -1,0 +1,37 @@
+[
+  {
+    "id": "map1",
+    "name": "Neon Yard",
+    "cost": 0,
+    "seed": 11,
+    "theme": "yard"
+  },
+  {
+    "id": "map2",
+    "name": "Warehouse Night",
+    "cost": 0,
+    "seed": 22,
+    "theme": "warehouse"
+  },
+  {
+    "id": "map3",
+    "name": "Industrial Rain",
+    "cost": 1500,
+    "seed": 33,
+    "theme": "industrial"
+  },
+  {
+    "id": "map4",
+    "name": "City Ruins",
+    "cost": 3000,
+    "seed": 44,
+    "theme": "city"
+  },
+  {
+    "id": "map5",
+    "name": "Port Docks",
+    "cost": 6000,
+    "seed": 55,
+    "theme": "docks"
+  }
+]

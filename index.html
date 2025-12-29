@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>FPVCustomEngine_M5</title>
+    <style>
+      html, body { margin:0; padding:0; background:#080511; height:100%; overflow:hidden; touch-action:none; }
+      #c { width:100vw; height:100vh; display:block; }
+      .layer { position:fixed; inset:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; color:#fff; }
+      .menu { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background: radial-gradient(1200px 700px at 50% 30%, rgba(150,80,255,0.25), rgba(0,0,0,0.75)); }
+      .title { font-size:40px; font-weight:900; letter-spacing:0.06em; text-shadow: 0 0 20px rgba(255,80,220,0.25); }
+      .panel { width:min(92vw, 520px); background: rgba(0,0,0,0.40); border:1px solid rgba(255,255,255,0.12); border-radius:18px; padding:14px; backdrop-filter: blur(8px); }
+      .row { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:10px 0; }
+      .btn { width:min(84vw, 420px); height:64px; border-radius:16px; border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; letter-spacing:0.06em; user-select:none; -webkit-user-select:none; }
+      .btn:active { transform: scale(0.99); }
+      .btnimg { width:min(84vw, 420px); height:64px; user-select:none; -webkit-user-select:none; pointer-events:auto; }
+      .small { font-size:13px; opacity:0.78; }
+      .hud { pointer-events:none; }
+      .topbar { position:absolute; left:10px; top:10px; right:10px; display:flex; justify-content:space-between; align-items:center; gap:10px; pointer-events:auto; }
+      .pill { background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.12); border-radius:999px; padding:8px 12px; backdrop-filter: blur(6px); }
+      .stickZone { position:absolute; width:44vmin; max-width:260px; aspect-ratio:1/1; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); pointer-events:auto; }
+      #leftZone { left:16px; bottom:16px; }
+      #rightZone { right:16px; bottom:16px; }
+      .knob { position:absolute; left:50%; top:50%; width:28%; height:28%; transform:translate(-50%,-50%); border-radius:999px; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.14); }
+      #fireBtn { position:absolute; right:18px; bottom:46vmin; width:120px; height:120px; max-width:26vmin; max-height:26vmin; border-radius:999px; background:rgba(255, 72, 200, 0.22); border:1px solid rgba(255,255,255,0.12); pointer-events:auto; display:flex; align-items:center; justify-content:center; font-weight:900; letter-spacing:0.08em; }
+      #hint { position:absolute; left:50%; bottom:8px; transform:translateX(-50%); font-size:12px; opacity:0.75; }
+      .hidden { display:none !important; }
+      select { background: rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.12); border-radius:10px; padding:8px 10px; }
+      option { color:#000; }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+
+    <div class="layer menu" id="menu">
+      <div class="title" id="title">Neon FPV</div>
+      <img class="btnimg" id="btnPlayImg" alt="Play"/>
+      <img class="btnimg" id="btnMapsImg" alt="Maps"/>
+      <img class="btnimg" id="btnShopImg" alt="Shop"/>
+      <img class="btnimg" id="btnSettingsImg" alt="Settings"/>
+      <div class="small">M5 • Custom WebGL2 Engine • Android via GitHub Actions</div>
+    </div>
+
+    <div class="layer hidden" id="maps">
+      <div class="panel" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div class="row"><div style="font-weight:900; font-size:18px;" id="mapsTitle">Maps</div><div class="pill" id="coinsTop">Coins: 0</div></div>
+        <div id="mapsList"></div>
+        <div class="btn" id="mapsBack">Back</div>
+      </div>
+    </div>
+
+    <div class="layer hidden" id="shop">
+      <div class="panel" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div class="row"><div style="font-weight:900; font-size:18px;" id="shopTitle">Shop</div><div class="pill" id="coinsShop">Coins: 0</div></div>
+        <div id="dronesList" style="max-height:52vh; overflow:auto;"></div>
+        <div class="btn" id="shopBack">Back</div>
+      </div>
+    </div>
+
+    <div class="layer hidden" id="settings">
+      <div class="panel" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div style="font-weight:900; font-size:18px; margin-bottom:10px;" id="settingsTitle">Settings</div>
+        <div class="row">
+          <div id="modeLabel">Mode</div>
+          <select id="modeSelect">
+            <option value="acro">Acro</option>
+            <option value="angle">Angle</option>
+          </select>
+        </div>
+        <div class="row">
+          <div id="langLabel">Language</div>
+          <select id="langSelect">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="uk">Українська</option>
+          </select>
+        </div>
+        <div class="row">
+          <div id="gpLabel">Gamepad</div>
+          <div class="pill" id="gpState">—</div>
+        </div>
+        <div class="small" id="gpHint">PS4 profile on top. Remap later.</div>
+        <div class="btn" id="settingsBack">Back</div>
+      </div>
+    </div>
+
+    <div class="layer hud hidden" id="hud">
+      <div class="topbar">
+        <div class="pill" id="coinsHud">Coins: 0</div>
+        <div class="pill" id="droneHud">Drone</div>
+        <div class="pill" id="modeHud">Acro</div>
+      </div>
+      <div id="leftZone" class="stickZone"><div class="knob" id="leftKnob"></div></div>
+      <div id="rightZone" class="stickZone"><div class="knob" id="rightKnob"></div></div>
+      <div id="fireBtn">FIRE</div>
+      <div id="hint">Left: throttle/yaw • Right: pitch/roll • Fire: shoot / kamikaze detonate</div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

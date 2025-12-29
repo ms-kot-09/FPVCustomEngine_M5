@@ -1,0 +1,11 @@
+{
+  "rewards": {
+    "soldier": 5,
+    "car": 10,
+    "tank": 25
+  },
+  "spawn": {
+    "interval_min": 20,
+    "interval_max": 30
+  }
+}

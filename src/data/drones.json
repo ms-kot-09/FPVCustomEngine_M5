@@ -1,0 +1,163 @@
+[
+  {
+    "id": "armed_1",
+    "name": "Wasp-AR",
+    "type": "armed",
+    "weapon": "minigun",
+    "thrust": 18,
+    "rates": {
+      "roll": 420,
+      "pitch": 420,
+      "yaw": 260
+    },
+    "cost": 0
+  },
+  {
+    "id": "armed_2",
+    "name": "Viper-SMG",
+    "type": "armed",
+    "weapon": "smg",
+    "thrust": 17,
+    "rates": {
+      "roll": 460,
+      "pitch": 460,
+      "yaw": 280
+    },
+    "cost": 300
+  },
+  {
+    "id": "armed_3",
+    "name": "Falcon-RKT",
+    "type": "armed",
+    "weapon": "rocket",
+    "thrust": 19.5,
+    "rates": {
+      "roll": 390,
+      "pitch": 390,
+      "yaw": 240
+    },
+    "cost": 700
+  },
+  {
+    "id": "armed_4",
+    "name": "Mantis-LZR",
+    "type": "armed",
+    "weapon": "laser",
+    "thrust": 18.5,
+    "rates": {
+      "roll": 410,
+      "pitch": 410,
+      "yaw": 250
+    },
+    "cost": 900
+  },
+  {
+    "id": "armed_5",
+    "name": "Hornet-BST",
+    "type": "armed",
+    "weapon": "burst",
+    "thrust": 17.8,
+    "rates": {
+      "roll": 440,
+      "pitch": 440,
+      "yaw": 270
+    },
+    "cost": 1200
+  },
+  {
+    "id": "kamik_1",
+    "name": "Kamikaze-XS",
+    "type": "kamikaze",
+    "weapon": "",
+    "thrust": 16.5,
+    "rates": {
+      "roll": 480,
+      "pitch": 480,
+      "yaw": 300
+    },
+    "blast": 4.0,
+    "cost": 600
+  },
+  {
+    "id": "kamik_2",
+    "name": "Kamikaze-S",
+    "type": "kamikaze",
+    "weapon": "",
+    "thrust": 16.8,
+    "rates": {
+      "roll": 470,
+      "pitch": 470,
+      "yaw": 295
+    },
+    "blast": 5.5,
+    "cost": 1000
+  },
+  {
+    "id": "kamik_3",
+    "name": "Kamikaze-M",
+    "type": "kamikaze",
+    "weapon": "",
+    "thrust": 17.2,
+    "rates": {
+      "roll": 460,
+      "pitch": 460,
+      "yaw": 290
+    },
+    "blast": 7.0,
+    "cost": 1600
+  },
+  {
+    "id": "kamik_4",
+    "name": "Kamikaze-L",
+    "type": "kamikaze",
+    "weapon": "",
+    "thrust": 18.0,
+    "rates": {
+      "roll": 440,
+      "pitch": 440,
+      "yaw": 275
+    },
+    "blast": 9.0,
+    "cost": 2400
+  },
+  {
+    "id": "kamik_5",
+    "name": "Kamikaze-XL",
+    "type": "kamikaze",
+    "weapon": "",
+    "thrust": 19.2,
+    "rates": {
+      "roll": 420,
+      "pitch": 420,
+      "yaw": 260
+    },
+    "blast": 11.0,
+    "cost": 3400
+  },
+  {
+    "id": "dji_1",
+    "name": "DJI Ares",
+    "type": "dji",
+    "weapon": "heavy_cannon",
+    "thrust": 28,
+    "rates": {
+      "roll": 260,
+      "pitch": 260,
+      "yaw": 200
+    },
+    "cost": 5000
+  },
+  {
+    "id": "dji_2",
+    "name": "DJI Nemesis",
+    "type": "dji",
+    "weapon": "heavy_laser",
+    "thrust": 30,
+    "rates": {
+      "roll": 240,
+      "pitch": 240,
+      "yaw": 190
+    },
+    "cost": 8000
+  }
+]
