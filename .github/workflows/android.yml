@@ -20,10 +20,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
 
       - name: Install deps
-        run: npm ci || npm i
+        run: npm install --no-fund --no-audit
 
       - name: Build web
         run: npm run build
